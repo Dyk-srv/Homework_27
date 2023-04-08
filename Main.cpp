@@ -78,17 +78,19 @@ int main() {
 	std::cout << "Do you want to edit any disk info (Y/N)? ";
 	char answer;
 	std::cin >> answer;
-	if (std::tolower(answer) == 'y') {
+	int disk;
+	const int qty = 3;
+	movies arr[3]{ film1, film2, film3 };
+	bool flag = false;
+	while (std::tolower(answer) == 'y') {
 		std::cout << "Select disk number to edit info:\n1 - \"" << film1.title << "\"\n2 - \"" << film2.title << "\"\n3 - \"" << film3.title <<
 			"\"\n(or press 0 to exit) -> ";
-		int disk;
-		const int qty = 3;
-		movies arr[3]{ film1, film2, film3 };
-		bool flag = false;
 		do {
 			std::cin >> disk;
-			if (disk == 0)
+			if (disk == 0) {
+				flag = true;
 				break;
+			}
 			for (int i = 0; i < qty; i++) {
 				if (disk == i + 1) {
 					std::cout << std::endl;
@@ -102,6 +104,10 @@ int main() {
 			if (!flag)
 				std::cout << "No such disk found!\nPlease repeate you choice -> ";
 		} while (!flag);
+		if (disk == 0)
+			break;
+		std::cout << "Do you wish to continue editing (Y/N)? ";
+		std::cin >> answer;
 	}
 	std::cout << "\nEnd of program.\n";
 
