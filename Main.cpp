@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 
 struct movies {
@@ -10,7 +10,7 @@ struct movies {
 };
 
 void show_movie(const movies& film) {
-	std::cout << "Title:    " << '\"' << film.title << "\"\n";
+	std::cout << "Title:    " << film.title << '\n';
 	std::cout << "Year :    " << film.year << '\n';
 	std::cout << "Genre:    " << film.genre << '\n';
 	std::cout << "Duration: " << film.duration << " min\n";
@@ -51,11 +51,11 @@ void update_info(movies& film) {
 		std::getline(std::cin, film.genre);
 		break;
 	case 4:
-		std::cout << "Enter new duration -> ";
+		std::cout << "Enter new duration (in minutes) -> ";
 		std::cin >> film.duration;
 		break;
 	case 5:
-		std::cout << "Enter new disk price -> ";
+		std::cout << "Enter new disk price (in RUB) -> ";
 		std::cin >> film.price;
 		break;
 	default:
@@ -78,21 +78,24 @@ int main() {
 	std::cout << "Do you want to edit any disk info (Y/N)? ";
 	char answer;
 	std::cin >> answer;
-	int disk;
 	const int qty = 3;
-	movies arr[3]{ film1, film2, film3 };
-	bool flag = false;
-	while (std::tolower(answer) == 'y') {
-		std::cout << "Select disk number to edit info:\n1 - \"" << film1.title << "\"\n2 - \"" << film2.title << "\"\n3 - \"" << film3.title <<
-			"\"\n(or press 0 to exit) -> ";
-		do {
-			std::cin >> disk;
-			if (disk == 0) {
+	movies arr[qty]{ film1, film2, film3 };
+	int disk_choice;
+	bool flag;
+	while (std::tolower(answer) == 'y') {	// Цикл для бесконечного редактирования
+		std::cout << "Select disk number to edit info:\n";   
+		for (int i = 0; i < qty; i++)
+			std::cout << i + 1 << " - " << arr[i].title << '\n';
+		std::cout << "(or press 0 to exit) -> ";
+		flag = false;
+		do {	// Цикл для бесконечного выбора верного диска (0 - выход)
+			std::cin >> disk_choice;
+			if (disk_choice == 0) {
 				flag = true;
 				break;
 			}
 			for (int i = 0; i < qty; i++) {
-				if (disk == i + 1) {
+				if (disk_choice == i + 1) {
 					std::cout << std::endl;
 					show_movie(arr[i]);
 					update_info(arr[i]);
@@ -104,7 +107,7 @@ int main() {
 			if (!flag)
 				std::cout << "No such disk found!\nPlease repeate you choice -> ";
 		} while (!flag);
-		if (disk == 0)
+		if (disk_choice == 0)
 			break;
 		std::cout << "Do you wish to continue editing (Y/N)? ";
 		std::cin >> answer;
