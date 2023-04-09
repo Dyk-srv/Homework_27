@@ -82,13 +82,13 @@ int main() {
 	movies arr[qty]{ film1, film2, film3 };
 	int disk_choice;
 	bool flag;
-	while (std::tolower(answer) == 'y') {	// Цикл для бесконечного редактирования
+	while (std::tolower(answer) == 'y') {	// Cycle for editing info as long as user wishes to
 		std::cout << "Select disk number to edit info:\n";   
 		for (int i = 0; i < qty; i++)
 			std::cout << i + 1 << " - " << arr[i].title << '\n';
 		std::cout << "(or press 0 to exit) -> ";
 		flag = false;
-		do {	// Цикл для бесконечного выбора верного диска (0 - выход)
+		do {	// Cycle for correct disk choice (0 - exit)
 			std::cin >> disk_choice;
 			if (disk_choice == 0) {
 				flag = true;
