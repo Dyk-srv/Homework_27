@@ -81,34 +81,31 @@ int main() {
 	const int qty = 3;
 	movies arr[qty]{ film1, film2, film3 };
 	int disk_choice;
-	bool flag;
 	while (std::tolower(answer) == 'y') {	// Cycle for editing info as long as user wishes to
 		std::cout << "Select disk number to edit info:\n";   
 		for (int i = 0; i < qty; i++)
 			std::cout << i + 1 << " - " << arr[i].title << '\n';
 		std::cout << "(or press 0 to exit) -> ";
-		flag = false;
-		do {	// Cycle for correct disk choice (0 - exit)
+		do {	// Cycle for correct disk choice (0 to exit)
 			std::cin >> disk_choice;
-			if (disk_choice == 0) {
-				flag = true;
+			if (disk_choice >= 0 && disk_choice <= qty)
 				break;
-			}
-			for (int i = 0; i < qty; i++) {
-				if (disk_choice == i + 1) {
-					std::cout << std::endl;
-					show_movie(arr[i]);
-					update_info(arr[i]);
-					show_movie(arr[i]);
-					flag = true;
-					break;
-				}
-			}
-			if (!flag)
+			else {
 				std::cout << "No such disk found!\nPlease repeate you choice -> ";
-		} while (!flag);
+				continue;
+			}
+		} while (true);
 		if (disk_choice == 0)
 			break;
+		for (int i = 0; i < qty; i++) {
+			if (disk_choice == i + 1) {
+				std::cout << std::endl;
+				show_movie(arr[i]);
+				update_info(arr[i]);
+				show_movie(arr[i]);
+				break;
+			}
+		}
 		std::cout << "Do you wish to continue editing (Y/N)? ";
 		std::cin >> answer;
 	}
