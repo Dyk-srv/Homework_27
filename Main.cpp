@@ -86,7 +86,7 @@ int main() {
 		for (int i = 0; i < qty; i++)
 			std::cout << i + 1 << " - " << arr[i].title << '\n';
 		std::cout << "(or press 0 to exit) -> ";
-		do {	// Cycle for correct disk choice (0 to exit)
+		do {	// Cycle for correct disk choice
 			std::cin >> disk_choice;
 			if (disk_choice >= 0 && disk_choice <= qty)
 				break;
